@@ -7,13 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.beehive.adapters.BeehiveRecyclerAdapter
+import com.example.beehive.data.BeeRepo
+import com.example.beehive.data.Beehive
 import com.example.beehive.databinding.FragmentSortBinding
 
 
 class SortFragment : Fragment() {
 
     private lateinit var binding: FragmentSortBinding
-    private lateinit var criteriaSelected: String
+    private var criteriaSelected = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,15 +50,38 @@ class SortFragment : Fragment() {
     }
 
     private fun updateCriteriaState() {
-        binding.filledExposedDropdown.setOnItemClickListener { adapter, _, position, _ ->
-            criteriaSelected = adapter.getItemAtPosition(position) as String
+        binding.filledExposedDropdown.setOnItemClickListener { _, _, position, _ ->
+            criteriaSelected = position
         }
     }
 
     private fun onButtonPressed() {
-        //the criteria the user selected for sorting
-        criteriaSelected
-        //TODO()
+        binding.btnSort.visibility = View.GONE
+        binding.layoutCriteria.visibility = View.GONE
+        binding.recSort.visibility = View.VISIBLE
+        setupRecView(sortData(criteriaSelected))
+    }
+
+    private fun sortData(predicate: Int): List<Beehive> = BeeRepo.beehives.sortedBy {
+        when(predicate){
+            0 -> it.ownerNames
+            1 -> it.beehiveId
+            2 -> it.location
+            else -> it.location
+        }
+    }
+
+    private fun setupRecView(data: List<Beehive>) {
+        val beehiveAdapter = BeehiveRecyclerAdapter(data)
+        binding.recSort.apply {
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                RecyclerView.VERTICAL,
+                false
+            )
+            adapter = beehiveAdapter
+        }
+
     }
 
 }

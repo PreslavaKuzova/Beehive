@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small_margin"
+    android:paddingStart="@dimen/medium_margin"
+    android:paddingEnd="@dimen/medium_margin"
+    android:paddingBottom="@dimen/medium_margin"
+    android:paddingTop="@dimen/small_margin"
+    android:background="@drawable/item_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtHeader"
+        style="@style/HeaderStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="274-237"/>
+
+    <TextView
+        android:id="@+id/txtOwner"
+        style="@style/BeehiveInfoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="owner name"/>
+
+    <TextView
+        android:id="@+id/txtAddress"
+        style="@style/BeehiveInfoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="area, location, address"/>
+
+    <TextView
+        android:id="@+id/txtBeeFamilyCount"
+        style="@style/BeehiveInfoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bee families: 57"/>
+
+</LinearLayout>
